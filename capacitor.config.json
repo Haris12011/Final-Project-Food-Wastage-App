@@ -1,0 +1,8 @@
+{
+  "appId": "com.foodwaste.reducer",
+  "appName": "FoodWasteReducer",
+  "webDir": "build",
+  "server": {
+    "androidScheme": "https"
+  }
+}
