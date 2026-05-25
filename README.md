@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Food Waste Reducer Web Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React and Supabase based food waste reduction web application. The system allows users to create food listings, save food pickup locations, view available food on a UK map, reserve food, chat with food owners, receive notifications, and manage listings through profile and admin dashboards.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+```text
+Final-Project-Food-Wastage-App/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   └── .env.example
+│
+├── backend/
+│   ├── supabase_schema.sql
+│   └── migrations/
+│
+├── README.md
+└── .gitignore
+Main Features
+User registration and login
+Protected routes for authenticated users
+Create food listings
+Upload food images
+Save food pickup location using latitude and longitude
+UK-based food map
+Automatic map zoom to available food markers
+Distance shown in miles
+View listing details
+Claim / reserve food
+Reserved food removed from public Home and Map pages
+Chat between food owner and receiver
+Notifications for reservation activity
+User profile with created and reserved food
+Reserved food history
+Admin panel for managing listings
+Admin analytics dashboard
+Performance metrics page
+Technologies Used
+React
+React Router
+Supabase Authentication
+Supabase Database
+Supabase Storage
+Supabase Realtime
+React Leaflet / Leaflet
+Capacitor Geolocation
+Gemini AI
+Installation
 
-### `npm start`
+Go to the frontend folder:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+cd frontend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Install dependencies:
 
-### `npm test`
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Run the project:
 
-### `npm run build`
+npm run dev
+Environment Variables
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Create a .env file inside the frontend folder.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Use .env.example as a template:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_GEMINI_API_KEY=your_gemini_api_key
 
-### `npm run eject`
+Do not upload the real .env file to GitHub.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Supabase Database
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The backend folder contains the Supabase database schema and migration files.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Main tables include:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+food_listings
+messages
+notifications
+admin_users
 
-## Learn More
+The food_listings table stores the food item name, category, description, pickup window, pickup area, image URL, status, latitude, longitude, reservation user ID, and reservation time.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Main System Workflow
+User registers or logs in.
+User creates a food listing.
+Food location is saved at listing creation time.
+Available food appears on the Home page and UK Food Map.
+Another user opens the listing details page.
+User claims or reserves the food.
+Food status changes from available to reserved.
+Reserved food is removed from the public Home page and public Map.
+Reserved food remains visible in Profile and Reserved History.
+Food Status Logic
+available  → visible on Home and Map
+reserved   → hidden from public Home and Map
+picked_up  → hidden from public Home and Map
+cancelled  → hidden from public Home and Map
+expired    → hidden from public Home and Map
+Security
+Supabase Authentication is used for login and registration.
+Protected routes prevent unauthorised access.
+Admin pages are restricted using the admin_users table.
+Real API keys are stored in .env and are not uploaded to GitHub.
+Reserved food is hidden from public listings to prevent duplicate reservations.
+Admin Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The admin can:
 
-### Code Splitting
+View all food listings
+Delete listings
+Flag listings
+Mark food as available or unavailable
+View analytics dashboard
+View performance metrics
+Notes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This repository does not include real environment variables or secret API keys. To run the project, create your own .env file using the .env.example template.
